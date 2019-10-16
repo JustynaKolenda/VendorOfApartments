@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Card, Button } from 'react-bootstrap';
-import {allApartments, deleteApartmen} from './Conector';
+import {allApartments, deleteApartmen, deleteAllApartments} from './Conector';
 import { ExtendedApartmentModel } from './ModelApartament';
 
 type ApartmentS = {
@@ -30,33 +30,46 @@ export class ApartmentView extends React.Component<any, ApartmentS> {
             this.getAllApartments();
         })
     }
+    public deleteAll(){
+        deleteAllApartments().then(resp => { 
+            this.getAllApartments();
+        })
+    }
 
     componentDidMount(){
         this.getAllApartments()
     }
 
     render(){
-        console.log(this.state.apartments)
         const {apartments} = this.state
         return(
             <div>
+                {apartments.length > 0 ? 
+                    <div><Button variant="danger" className="viewOfApartments--buttonDanger" onClick={this.deleteAll}>Delete All</Button> 
+                    <Card.Link  href={'/create'} className="viewOfApartments--buttonPrimary viewOfApartments--buttonPrimary__localizationButton">Create New</Card.Link> </div>
+                    :
+                    <Card.Link  href={'/create'} className="viewOfApartments--buttonPrimary viewOfApartments--buttonPrimary__localizationButton">Create New</Card.Link>
+                }
+            <div className={"viewOfApartments--groupCard"}>
+                
             {apartments.map((apartment: ExtendedApartmentModel, key) =>{
             return (
-                <Card style={{ width: '18rem' }} key={apartment.id}>
+                <Card className={"viewOfApartments--singleCard"} key={apartment.id}>
                     <Card.Body >
-                        <Card.Title>Apartments</Card.Title>
+                        <Card.Title>Apartment</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted"> {apartment.description}</Card.Subtitle>
                         <Card.Text>
-                            {apartment.city}
-                            {apartment.price}
+                          City: {apartment.city}
                         </Card.Text>
-                        <Card.Link href={`/apartament/${apartment.id}`}>Precise description</Card.Link>
-                        <Button onClick={()=>{this.delete(apartment.id)}}>Delete</Button>
+                        <Card.Text>Price: {apartment.price}</Card.Text>
+                        <Card.Link className="viewOfApartments--buttonPrimary viewOfApartments--buttonPrimary__localInCard" href={`/apartament/${apartment.id}`}>Precise description</Card.Link>
+                        <Button variant="danger" onClick={()=>{this.delete(apartment.id)}}>Delete</Button>
                     </Card.Body>
                 </Card>
             )
             })
         }
+            </div>
             </div>
         )
     }

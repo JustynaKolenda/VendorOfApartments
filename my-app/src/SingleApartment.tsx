@@ -34,8 +34,7 @@ export class SingleApartment extends React.Component<any, Apartment> {
         getApartmen(id).then(resp => { 
             this.setState({
                 apartment: resp.data
-            })
-            console.log(resp)        
+            })       
         })
     }
 
@@ -44,22 +43,36 @@ export class SingleApartment extends React.Component<any, Apartment> {
     }
 
     render(){
-        console.log(this.state.apartment)
         const {apartment} = this.state
         return(
-            <div>
+            <div className="singleApartmentView">
                 <Card style={{ width: '18rem' }} key={apartment.id}>
                     <Card.Body >
-                        <Card.Title>Apartment</Card.Title>
+                        <Card.Title>Localization of Apartment</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted"> {apartment.description}</Card.Subtitle>
                         <Card.Text>
-                            {apartment.city}
+                            City: {apartment.city}
                         </Card.Text>
                         <Card.Text>
-                            {apartment.price}
+                            Street: {apartment.street}
                         </Card.Text>
-                        <Card.Link href={`/apartament/${apartment.id}`}>Update</Card.Link>
-                        <Card.Link onClick={this.backToAllList} href="/">Back</Card.Link>
+                        <Card.Text>
+                            Property: {apartment.property}
+                        </Card.Text>
+                        <Card.Text>
+                            Apartment: {apartment.apartment}
+                        </Card.Text>
+                        <Card.Text>
+                            Price: {apartment.price}
+                        </Card.Text>
+                        <Card.Text>
+                            Type: {apartment.type}
+                        </Card.Text>
+                        <Card.Text>
+                            Description: {apartment.description}
+                        </Card.Text>
+                        <Card.Link  className="viewOfApartments--buttonPrimary viewOfApartments--buttonPrimary__localInCard" href={`/update/${apartment.id}`}>Update</Card.Link>
+                        <Card.Link  className="viewOfApartments--buttonPrimary viewOfApartments--buttonPrimary__localInCard" onClick={this.backToAllList} href="/">Back</Card.Link>
                     </Card.Body>
                 </Card>
             </div>

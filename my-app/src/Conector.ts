@@ -20,19 +20,22 @@ export function createNew(data: Draft){
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res.status)
       })
       .catch(error => 
          console.log("Błąd: ", error));
     }
-
 export function deleteApartmen(id:number){
     return fetch(`${process.env.REACT_APP_MY_API}/delete/${id}`)
     .then(resp => resp.json())
 }
 
-export function updateAdvertisement(updateData: ExtendedApartmentModel){
-    return fetch(`${process.env.REACT_APP_MY_API}/update`,{
+export function deleteAllApartments(){
+    return fetch(`${process.env.REACT_APP_MY_API}/deleteAll`)
+    .then(resp => resp.json())
+}
+
+export function updateAdvertisement(updateData: ExtendedApartmentModel, id:number){
+    return fetch(`${process.env.REACT_APP_MY_API}/update/${id}`,{
         method: 'POST',
         body: JSON.stringify(updateData),
         headers: {
@@ -40,9 +43,6 @@ export function updateAdvertisement(updateData: ExtendedApartmentModel){
         }  
     })
       .then(res => res.json())
-      .then(res => {
-        console.log(res.status)
-      })
       .catch(error => 
          console.log("Błąd: ", error));
 }

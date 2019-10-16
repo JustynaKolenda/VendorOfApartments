@@ -1,0 +1,38 @@
+.viewOfApartments {
+    &--groupCard{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    &--singleCard{
+        margin-top: 20px;
+        width: 18rem;
+        margin-right: 20px;
+    }
+
+    &--buttonPrimary{
+        color: #ffffff;
+        background-color: #007bff;
+        font-size: 14px;
+        border-radius: 8px;
+        padding: 10px;
+
+        &__localizationButton{
+            float: right;
+            margin-top: 9px;
+        }
+        &__localInCard{
+            padding: 9px;
+            margin-right: 17px;
+        }
+    }
+
+    &--buttonDanger{
+        float: right;
+        position: relative;
+        right: 10%;
+        margin-top: 10px;
+    }
+}
